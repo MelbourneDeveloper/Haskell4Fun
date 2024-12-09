@@ -1,0 +1,60 @@
+{
+    "articles": [
+        {
+            "title": "Introduction to Haskell",
+            "file": "articles/01-introduction-to-haskell.md"
+        },
+        {
+            "title": "Basic Functions and Types",
+            "file": "articles/02-basic-functions-and-types.md"
+        },
+        {
+            "title": "Lists and List Operations",
+            "file": "articles/03-lists-and-list-operations.md"
+        },
+        {
+            "title": "Pattern Matching",
+            "file": "articles/04-pattern-matching.md"
+        },
+        {
+            "title": "Higher-Order Functions",
+            "file": "articles/05-higher-order-functions.md"
+        },
+        {
+            "title": "Recursion",
+            "file": "articles/06-recursion.md"
+        },
+        {
+            "title": "Type Classes",
+            "file": "articles/07-type-classes.md"
+        },
+        {
+            "title": "Function Composition",
+            "file": "articles/08-function-composition.md"
+        },
+        {
+            "title": "Error Handling",
+            "file": "articles/09-error-handling.md"
+        },
+        {
+            "title": "Result Objects",
+            "file": "articles/10-result-objects.md"
+        },
+        {
+            "title": "Immutable Records",
+            "file": "articles/11-immutable-records.md"
+        },
+        {
+            "title": "Custom Types and Data Modeling",
+            "file": "articles/12-custom-types.md"
+        },
+        {
+            "title": "IO and Effects",
+            "file": "articles/13-io-and-effects.md"
+        },
+        {
+            "title": "Testing in Haskell",
+            "file": "articles/14-testing.md"
+        }
+    ]
+}

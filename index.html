@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haskell 4 Fun</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fira-code@6.2.0/distr/fira_code.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/googlearchive/code-prettify@master/styles/desert.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.1.3/marked.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/googlearchive/code-prettify@master/loader/run_prettify.js?lang=hs"></script>
+    <script src="app.js"></script>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #10b981;
+            --text-color: #1f2937;
+            --text-light: #6b7280;
+            --bg-color: #f8fafc;
+            --code-bg: #1a1b26;
+            --nav-height: 4rem;
+            --content-width: 1000px;
+            --card-radius: 8px;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+            --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+            --heading-font: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            font-family: var(--heading-font);
+            line-height: 1.7;
+            color: var(--text-color);
+            background: var(--bg-color);
+            min-height: 100vh;
+            letter-spacing: -0.01em;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            height: var(--nav-height);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.nav-hidden {
+            transform: translateY(-100%);
+        }
+
+        .navbar-brand .navbar-item {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            padding: 0 1.5rem;
+        }
+
+        .navbar-item {
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .navbar-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: all 0.2s ease;
+            transform: translateX(-50%);
+        }
+
+        .navbar-item:hover::after {
+            width: 100%;
+        }
+
+        .navbar-item:hover {
+            background-color: var(--bg-color) !important;
+            color: var(--primary-color) !important;
+        }
+
+        .section {
+            max-width: var(--content-width);
+            margin: var(--nav-height) auto 0;
+            padding: 3rem 2rem;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+            animation-delay: 0.1s;
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin: 2.5rem 0 1.5rem;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        pre.prettyprint {
+            background: var(--code-bg) !important;
+            border: none !important;
+            border-radius: var(--card-radius);
+            padding: 1.5rem !important;
+            margin: 2rem 0;
+            box-shadow: var(--card-shadow);
+            color: #f8f8f2 !important;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        pre.prettyprint::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        pre.prettyprint::after {
+            content: 'Haskell';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            opacity: 0.6;
+            font-family: var(--heading-font);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        pre.prettyprint:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        pre.prettyprint:hover::before {
+            opacity: 1;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.9em;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .toc {
+
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        .toc:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc li {
+            margin: 0.75rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .toc li:hover {
+            transform: translateX(4px);
+        }
+
+        .toc li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+
+        .toc li:hover::before {
+            transform: translateX(2px);
+        }
+
+        .toc a {
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-color));
+            background-size: 0% 1px;
+            background-repeat: no-repeat;
+            background-position: left bottom;
+            transition: background-size 0.3s ease;
+        }
+
+        .toc a:hover {
+            background-size: 100% 1px;
+            text-decoration: none;
+        }
+
+        .article {
+            background: white;
+            border-radius: var(--card-radius);
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        .article:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .article p {
+            margin-bottom: 1.5rem;
+            font-size: 1.0625rem;
+            color: var(--text-light);
+            transition: color 0.2s ease;
+        }
+
+        .article p:hover {
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --nav-height: 3.5rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .article {
+                padding: 1.5rem;
+            }
+
+            pre.prettyprint {
+                padding: 1.25rem !important;
+                font-size: 0.875rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .content {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        :not(pre)>code {
+            background: rgba(37, 99, 235, 0.08) !important;
+            color: var(--primary-color) !important;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        :not(pre)>code:hover {
+            background: rgba(37, 99, 235, 0.12) !important;
+            transform: translateY(-1px);
+        }
+
+        .prettyprint .str {
+            color: #9ece6a !important;
+        }
+
+        .prettyprint .kwd {
+            color: #7aa2f7 !important;
+        }
+
+        .prettyprint .com {
+            color: #565f89 !important;
+        }
+
+        .prettyprint .typ {
+            color: #bb9af7 !important;
+        }
+
+        .prettyprint .lit {
+            color: #ff9e64 !important;
+        }
+
+        .prettyprint .pun {
+            color: #c0caf5 !important;
+        }
+
+        .prettyprint .pln {
+            color: #c0caf5 !important;
+        }
+
+        .prettyprint .dec {
+            color: #bb9af7 !important;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(37, 99, 235, 0.1);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: spin 0.8s linear infinite;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .spinner.visible {
+            opacity: 1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* Line numbers for code blocks */
+        pre.prettyprint {
+            counter-reset: line;
+        }
+
+        pre.prettyprint span.line {
+            display: inline-block;
+            width: 100%;
+        }
+
+        pre.prettyprint span.line::before {
+            counter-increment: line;
+            content: counter(line);
+            display: inline-block;
+            padding: 0 0.5em;
+            margin-right: 0.5em;
+            color: var(--text-light);
+            opacity: 0.5;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 2.5em;
+            text-align: right;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .navbar-brand .navbar-item {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 8s ease infinite;
+        }
+
+        .section {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.03), transparent 70%),
+                radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.03), transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .toc,
+        .article {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .toc li:hover::before {
+            animation: pulse 1s ease infinite;
+        }
+
+        pre.prettyprint {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            color: var(--text-light);
+            font-size: 0.75rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.2s ease;
+        }
+
+        pre.prettyprint:hover .copy-button {
+            opacity: 1;
+        }
+
+        .copy-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .copy-button.copied::before {
+            content: '✓';
+            margin-right: 0.25rem;
+            display: inline-block;
+            animation: checkmark 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .section::before {
+                opacity: 0.5;
+            }
+        }
+
+        .content {
+            animation: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .article {
+            opacity: 1;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        h1,
+        h2,
+        .toc {
+            opacity: 1;
+            animation: slideUp 0.4s ease-out;
+            animation-delay: 0.1s;
+        }
+
+        p {
+            margin: 1.5rem 0;
+            color: var(--text-color);
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+            animation-delay: 0.3s;
+            width: 100%;
+        }
+
+        ul:not(.toc ul) {
+            width: 100%;
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        ul:not(.toc ul) li {
+            margin: 0.75rem 0;
+            position: relative;
+        }
+
+        ul:not(.toc ul) li::marker {
+            color: var(--primary-color);
+        }
+
+        .content-container {
+            width: 100%;
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 2rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="#/about" onclick="navigateTo('about', event)">Haskell 4 Fun</a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="#/about" onclick="navigateTo('about', event)">About</a>
+                <a class="navbar-item" href="#/labs" onclick="navigateTo('labs', event)">Labs</a>
+                <a class="navbar-item" href="#/read" onclick="navigateTo('read', event)">Read</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <main id="content" class="section">
+        <div class="content">
+            <!-- Content will be loaded here -->
+        </div>
+    </main>
+
+    <!-- Add spinner element -->
+    <div id="spinner" class="spinner" style="display: none;"></div>
+
+    <script>
+        let lastScrollY = window.scrollY;
+        const navbar = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY) {
+                navbar.classList.add('nav-hidden');
+            } else {
+                navbar.classList.remove('nav-hidden');
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // Add copy functionality to code blocks
+        document.querySelectorAll('pre.prettyprint').forEach(block => {
+            const button = document.createElement('button');
+            button.className = 'copy-button';
+            button.textContent = 'Copy';
+
+            button.addEventListener('click', async () => {
+                const code = block.textContent;
+                await navigator.clipboard.writeText(code);
+
+                button.classList.add('copied');
+                button.textContent = 'Copied!';
+
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+
+            block.style.position = 'relative';
+            block.appendChild(button);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                // Only handle pure anchor links (not routing links)
+                if (!href.startsWith('#/')) {
+                    e.preventDefault();
+                    const targetId = href.replace('#', '');
+                    const target = document.querySelector('#' + targetId);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+        // Redirect all 404s to the main page with the current path preserved after the hash
+        (function() {
+            var path = window.location.pathname;
+            // Remove any trailing slash
+            if (path.endsWith('/')) {
+                path = path.slice(0, -1);
+            }
+            // Extract the route after the repository base (if any)
+            var repoBase = '/Haskell4Fun'; // Replace with your repository name if different
+            if (path.startsWith(repoBase)) {
+                path = path.slice(repoBase.length);
+            }
+            // Redirect using hash
+            window.location.href = '#/' + path;
+        })();
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html> 
