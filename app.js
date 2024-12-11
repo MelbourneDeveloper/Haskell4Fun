@@ -155,10 +155,9 @@ const handleRoute = async () => {
             // Default meta tags for read
             updateMetaTags('Read Articles - Haskell4.fun', 'Browse through a collection of articles to learn more about Haskell and functional programming.');
         } else if (currentRoute === 'labs') {
-
-
             // Labs index
-            content = await renderRead();
+            const text = await fetchWithCache('labs.md');
+            content = marked(text);
             updateMetaTags('Labs - Haskell4.fun', 'Explore various labs and hands-on exercises to deepen your understanding of Haskell.');
         }
 
