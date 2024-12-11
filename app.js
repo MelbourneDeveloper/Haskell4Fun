@@ -94,14 +94,22 @@ const handleRoute = async () => {
             const text = await fetchWithCache(`articles/labs/${labName}.md`);
             content = marked(text);
 
-            // Default meta tags for labs
-            updateMetaTags('Labs - Haskell4.fun', 'Explore various labs and hands-on exercises to deepen your understanding of Haskell.');
         } else if (currentRoute === 'read') {
-            content = await renderRead();
 
+            // Read index
+
+            content = await renderRead();
             // Default meta tags for read
             updateMetaTags('Read Articles - Haskell4.fun', 'Browse through a collection of articles to learn more about Haskell and functional programming.');
-        } else {
+        } else if (currentRoute === 'labs') {
+
+
+            // Labs index
+            content = await renderRead();
+            updateMetaTags('Labs - Haskell4.fun', 'Explore various labs and hands-on exercises to deepen your understanding of Haskell.');
+        }
+
+        else {
             // Load regular page
             const text = await fetchWithCache(`${currentRoute}.md`);
             content = marked(text);
@@ -116,12 +124,12 @@ const handleRoute = async () => {
 
         // Remove spinner with a fade out
         spinner.classList.remove('visible');
-        
+
         // After a short delay to let spinner fade out, show the content
         setTimeout(() => {
             spinner.style.display = 'none';
             contentDiv.style.opacity = '1';
-            
+
             // Scroll to anchor if present
             if (anchor) {
                 const element = document.querySelector(`#${anchor}`);
@@ -155,9 +163,9 @@ const renderRead = async () => {
             <h1>Articles</h1>
             <div class="articles-container">
                 ${toc.map(({ title, file, summary, image, readingTime, tags }) => {
-                    if (!file) return ''; // Skip incomplete entries
-                    const articlePath = file.replace('articles/', '').replace('.md', '');
-                    return `
+            if (!file) return ''; // Skip incomplete entries
+            const articlePath = file.replace('articles/', '').replace('.md', '');
+            return `
                         <div class="article-card">
                             <a href="#/read/${articlePath}" onclick="window.navigateTo('read/${articlePath}', event)">
                                 ${image ? `<img src=".${image}" alt="${title}" class="article-image">` : ''}
@@ -186,7 +194,7 @@ const renderRead = async () => {
                             </div>
                         </div>
                     `;
-                }).join('')}
+        }).join('')}
             </div>
         `;
         return content;
@@ -228,22 +236,22 @@ const cache = new Map();
 const fetchWithCache = async url => {
     const cached = cache.get(url);
     const now = Date.now();
-    
+
     if (cached && now < cached.expiresAt) {
         return cached.content;
     }
-    
+
     const response = await fetch(url);
     if (!response.ok) {
         throw new Error(`Error ${response.status}: ${response.statusText}`);
     }
-    
+
     const content = await response.text();
     cache.set(url, {
         content,
         expiresAt: now + CACHE_DURATION_MS
     });
-    
+
     return content;
 };
 
