@@ -32,6 +32,9 @@ jobs:
 
       - name: Generate Sitemap
         run: node scripts/generate-sitemap.js
+
+      - name: Rename Sitemap
+        run: mv sitemap-generated.xml sitemap.xml
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
