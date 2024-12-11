@@ -55,5 +55,5 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 </urlset>`;
 
 // Write sitemap to file with proper XML formatting
-fs.writeFileSync('sitemap-generated.xml', sitemap.replace(/^\s+/gm, '    '));
+fs.writeFileSync('sitemap.xml', sitemap.replace(/^\s+/gm, '    '));
 console.log('Sitemap generated successfully!'); 
