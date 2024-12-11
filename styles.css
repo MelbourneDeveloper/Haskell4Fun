@@ -700,3 +700,8 @@ ul ol {
     gap: var(--space-xl);
     padding: var(--space-xl) 0;
 }
+
+.hover-link:hover {
+    text-decoration: underline;
+    color: var(--color-primary-dark);
+}
