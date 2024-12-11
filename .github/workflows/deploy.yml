@@ -44,7 +44,7 @@ jobs:
         with:
           path: |
             .
-            sitemap.xml
+            ./sitemap.xml
       
       - name: Deploy to GitHub Pages
         id: deployment
