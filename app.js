@@ -35,6 +35,14 @@ window.navigateTo = (route, event) => {
     window.location.hash = `#/${route}`;
 };
 
+const updateMetaTags = (title, description) => {
+    document.title = title || 'Default Title';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+        metaDescription.setAttribute('content', description || 'Default description');
+    }
+};
+
 /**
  * Handles routing based on the current hash.
  */
@@ -60,6 +68,11 @@ const handleRoute = async () => {
         if (currentRoute.startsWith('read/')) {
             const articlePath = currentRoute.split('/').slice(1).join('/');
             const text = await fetchWithCache(`articles/${articlePath}.md`);
+            const toc = await loadTOC();
+            const article = toc.find(a => a.file === `articles/${articlePath}.md`);
+
+            // Update meta tags with fallback to summary
+            updateMetaTags(article.metaTitle, article.metaDescription || article.summary);
 
             // Transform markdown anchor links to include the article path
             const transformedText = text.replace(
@@ -80,12 +93,21 @@ const handleRoute = async () => {
             const labName = currentRoute.split('/')[1];
             const text = await fetchWithCache(`articles/labs/${labName}.md`);
             content = marked(text);
+
+            // Default meta tags for labs
+            updateMetaTags('Labs - Haskell4.fun', 'Explore various labs and hands-on exercises to deepen your understanding of Haskell.');
         } else if (currentRoute === 'read') {
             content = await renderRead();
+
+            // Default meta tags for read
+            updateMetaTags('Read Articles - Haskell4.fun', 'Browse through a collection of articles to learn more about Haskell and functional programming.');
         } else {
             // Load regular page
             const text = await fetchWithCache(`${currentRoute}.md`);
             content = marked(text);
+
+            // Default meta tags for other pages
+            updateMetaTags('Haskell4.fun', 'Learn Haskell and functional programming through articles, labs, and more.');
         }
 
         // First, prepare the content but don't show it yet

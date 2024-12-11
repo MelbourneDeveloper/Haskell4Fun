@@ -10,7 +10,9 @@
             "tags": [
                 "beginner",
                 "fundamentals"
-            ]
+            ],
+            "metaTitle": "Introduction to Haskell - Learn Functional Programming",
+            "metaDescription": "Start your journey into functional programming with Haskell. Discover its unique features like pure functions and lazy evaluation."
         },
         {
             "title": "Basic Functions and Types",
