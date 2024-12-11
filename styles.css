@@ -2,18 +2,40 @@
    Root Variables
    ========================================================================== */
 :root {
-    --primary-color: #2563eb;
-    --primary-dark: #1d4ed8;
-    --secondary-color: #10b981;
-    --text-color: #1f2937;
-    --text-light: #6b7280;
-    --bg-color: #f8fafc;
-    --code-bg: #1a1b26;
+    /* Brand Colors */
+    --color-primary: #2563eb;
+    --color-primary-dark: #1d4ed8;
+    --color-secondary: #10b981;
+    
+    /* Text Colors */
+    --color-text: #1f2937;
+    --color-text-light: #6b7280;
+    
+    /* Background Colors */
+    --color-bg: #f8fafc;
+    --color-code-bg: #1a1b26;
+    --color-nav-bg: rgba(255, 255, 255, 0.8);
+    --color-nav-mobile-bg: rgba(255, 255, 255, 0.95);
+    
+    /* Shadow Colors */
+    --color-shadow-light: rgba(0, 0, 0, 0.04);
+    --color-shadow-medium: rgba(0, 0, 0, 0.05);
+    --color-shadow-dark: rgba(0, 0, 0, 0.08);
+    --color-shadow-nav: rgba(0, 0, 0, 0.1);
+    
+    /* Gradient Colors */
+    --color-gradient-primary: rgba(37, 99, 235, 0.03);
+    --color-gradient-secondary: rgba(16, 185, 129, 0.03);
+    --color-code-highlight: rgba(255, 255, 255, 0.1);
+    --color-code-highlight-hover: rgba(255, 255, 255, 0.2);
+    --color-inline-code-bg: rgba(37, 99, 235, 0.08);
+
+    /* Non-color variables */
     --nav-height: 4rem;
     --content-width: 1000px;
     --card-radius: 8px;
-    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-    --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    --card-shadow: 0 4px 6px -1px var(--color-shadow-dark), 0 2px 4px -1px var(--color-shadow-light);
+    --card-shadow-hover: 0 10px 15px -3px var(--color-shadow-dark), 0 4px 6px -2px var(--color-shadow-light);
     --heading-font: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
@@ -23,22 +45,22 @@
 body {
     font-family: var(--heading-font);
     line-height: 1.7;
-    color: var(--text-color);
-    background: var(--bg-color);
+    color: var(--color-text);
+    background: var(--color-bg);
     min-height: 100vh;
     letter-spacing: -0.01em;
 }
 
 /* Links */
 a {
-    color: var(--primary-color);
+    color: var(--color-primary);
     text-decoration: none;
     transition: all 0.2s ease;
     font-weight: 500;
 }
 
 a:hover {
-    color: var(--primary-dark);
+    color: var(--color-primary-dark);
     text-decoration: underline;
 }
 
@@ -46,11 +68,11 @@ a:hover {
 h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--text-color);
+    color: var(--color-text);
     margin-bottom: 1.5rem;
     line-height: 1.2;
     letter-spacing: -0.02em;
-    background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(120deg, var(--color-primary), var(--color-secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -62,7 +84,7 @@ h1 {
 h2 {
     font-size: 1.875rem;
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--color-text);
     margin: 2.5rem 0 1.5rem;
     line-height: 1.3;
     letter-spacing: -0.01em;
@@ -73,7 +95,7 @@ h2 {
 
 p {
     margin: 1.5rem 0;
-    color: var(--text-color);
+    color: var(--color-text);
     opacity: 0;
     animation: slideUp 0.6s ease forwards;
     animation-delay: 0.3s;
@@ -84,10 +106,10 @@ p {
    Navigation
    ========================================================================== */
 .navbar {
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--color-nav-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px var(--color-shadow-medium);
     height: var(--nav-height);
     position: fixed;
     top: 0;
@@ -103,9 +125,9 @@ p {
 .navbar-brand .navbar-item {
     font-weight: 700;
     font-size: 1.25rem;
-    color: var(--primary-color);
+    color: var(--color-primary);
     padding: 0 1.5rem;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-primary));
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -120,10 +142,10 @@ p {
         left: 0;
         right: 0;
         top: var(--nav-height);
-        background: rgba(255, 255, 255, 0.95);
+        background: var(--color-nav-mobile-bg);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 6px -1px var(--color-shadow-nav);
         padding: 0.5rem 0;
         display: none;
     }
@@ -155,7 +177,7 @@ p {
     height: 2px;
     width: 16px;
     left: calc(50% - 8px);
-    background-color: var(--primary-color);
+    background-color: var(--color-primary);
 }
 
 .navbar-burger span:nth-child(1) {
@@ -201,8 +223,8 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.03), transparent 70%),
-        radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.03), transparent 70%);
+    background: radial-gradient(circle at top right, var(--color-gradient-primary), transparent 70%),
+        radial-gradient(circle at bottom left, var(--color-gradient-secondary), transparent 70%);
     z-index: -1;
     pointer-events: none;
 }
@@ -221,7 +243,7 @@ p {
 .toc {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--color-nav-bg);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     opacity: 0;
     animation: slideUp 0.6s ease forwards;
@@ -250,7 +272,7 @@ p {
     content: "→";
     position: absolute;
     left: 0;
-    color: var(--secondary-color);
+    color: var(--color-secondary);
     font-weight: 500;
     transition: transform 0.2s ease;
 }
@@ -265,11 +287,11 @@ p {
 
 /* Articles */
 .article {
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--color-nav-bg);
     border-radius: var(--card-radius);
     padding: 2rem;
     box-shadow: var(--card-shadow);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-shadow-medium);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     opacity: 0;
     animation: slideUp 0.6s ease forwards;
@@ -291,7 +313,7 @@ p {
 }
 
 pre.prettyprint {
-    background: var(--code-bg) !important;
+    background: var(--color-code-bg) !important;
     border: none !important;
     border-radius: var(--card-radius);
     padding: 1.5rem !important;
@@ -312,7 +334,7 @@ pre.prettyprint::before {
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
     opacity: 0;
     transition: opacity 0.2s ease;
 }
@@ -327,7 +349,7 @@ pre.prettyprint::after {
     top: 0.5rem;
     right: 1rem;
     font-size: 0.75rem;
-    color: var(--text-light);
+    color: var(--color-text-light);
     opacity: 0.6;
     font-family: var(--heading-font);
     letter-spacing: 0.05em;
@@ -339,11 +361,11 @@ pre.prettyprint::after {
     position: absolute;
     top: 0.5rem;
     right: 3rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--color-code-highlight);
     border: none;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
-    color: var(--text-light);
+    color: var(--color-text-light);
     font-size: 0.75rem;
     cursor: pointer;
     opacity: 0;
@@ -355,14 +377,14 @@ pre.prettyprint:hover .copy-button {
 }
 
 .copy-button:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--color-code-highlight-hover);
     color: white;
 }
 
 /* Inline code */
 :not(pre) > code {
-    background: rgba(37, 99, 235, 0.08) !important;
-    color: var(--primary-color) !important;
+    background: var(--color-inline-code-bg) !important;
+    color: var(--color-primary) !important;
     padding: 0.2em 0.4em;
     border-radius: 4px;
     font-size: 0.9em;
@@ -495,7 +517,7 @@ ul:not(.toc ul) li {
 }
 
 ul:not(.toc ul) li::marker {
-    color: var(--primary-color);
+    color: var(--color-primary);
 }
 
 /* Ordered Lists */
@@ -513,11 +535,11 @@ ol li {
     margin: 0.75rem 0;
     padding-left: 0.5rem;
     line-height: 1.6;
-    color: var(--text-color);
+    color: var(--color-text);
 }
 
 ol li::marker {
-    color: var(--primary-color);
+    color: var(--color-primary);
     font-weight: 500;
 }
 
