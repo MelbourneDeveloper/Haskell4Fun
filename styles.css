@@ -414,4 +414,56 @@ pre.prettyprint:hover .copy-button {
         animation: none !important;
         transition: none !important;
     }
+}
+
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+/* Unordered Lists */
+ul:not(.toc ul) {
+    width: 100%;
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: 0.4s;
+}
+
+ul:not(.toc ul) li {
+    margin: 0.75rem 0;
+    position: relative;
+}
+
+ul:not(.toc ul) li::marker {
+    color: var(--primary-color);
+}
+
+/* Ordered Lists */
+ol {
+    width: 100%;
+    margin: 1.5rem 0;
+    padding-left: 2.5rem;
+    list-style-type: decimal;
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: 0.4s;
+}
+
+ol li {
+    margin: 0.75rem 0;
+    padding-left: 0.5rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+ol li::marker {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Nested Lists */
+ol ol, ul ul, ol ul, ul ol {
+    margin: 0.75rem 0;
+    opacity: 1;
+    animation: none;
 } 
