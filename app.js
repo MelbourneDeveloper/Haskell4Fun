@@ -138,7 +138,7 @@ const renderRead = async () => {
                     return `
                         <div class="article-card">
                             <a href="#/read/${articlePath}" onclick="window.navigateTo('read/${articlePath}', event)">
-                                ${image ? `<img src="${image}" alt="${title}" class="article-image">` : ''}
+                                ${image ? `<img src=".${image}" alt="${title}" class="article-image">` : ''}
                             </a>
                             <div class="article-content">
                                 <h3 class="article-title">
