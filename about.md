@@ -1,6 +1,6 @@
 # About
 
-Welcome to **Haskell 4 Fun**! This website is dedicated to providing non-technical, easy-to-understand explanations of Haskell concepts. Whether you're new to programming or looking to expand your knowledge, our articles aim to make learning Haskell enjoyable and accessible.
+Welcome to **Haskell4.fun**! This website is dedicated to providing non-technical, easy-to-understand explanations of Haskell concepts. Whether you're new to programming or looking to expand your knowledge, our articles aim to make learning Haskell enjoyable and accessible.
 
 ### What We Offer
 

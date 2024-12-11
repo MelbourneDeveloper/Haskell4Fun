@@ -24,7 +24,9 @@
             "tags": [
                 "types",
                 "functions"
-            ]
+            ],
+            "metaTitle": "Basic Functions and Types - Haskell's Type System",
+            "metaDescription": "Explore Haskell's type system and function declarations. Learn how strong static typing helps prevent bugs."
         },
         {
             "title": "Lists and List Operations",
@@ -36,7 +38,9 @@
             "tags": [
                 "lists",
                 "data structures"
-            ]
+            ],
+            "metaTitle": "Lists and List Operations - Haskell List Manipulation",
+            "metaDescription": "Master Haskell's list manipulation capabilities, from basic operations to advanced list comprehensions."
         },
         {
             "title": "Pattern Matching",
@@ -48,7 +52,9 @@
             "tags": [
                 "patterns",
                 "syntax"
-            ]
+            ],
+            "metaTitle": "Pattern Matching - Expressive Haskell Code",
+            "metaDescription": "Learn how pattern matching in Haskell makes code more expressive and concise while handling complex data structures."
         },
         {
             "title": "Higher-Order Functions",
@@ -60,7 +66,9 @@
             "tags": [
                 "advanced",
                 "functions"
-            ]
+            ],
+            "metaTitle": "Higher-Order Functions - Haskell Abstractions",
+            "metaDescription": "Discover the power of higher-order functions in Haskell, enabling elegant abstractions and reusable code patterns."
         },
         {
             "title": "Recursion",
@@ -72,7 +80,9 @@
             "tags": [
                 "fundamentals",
                 "patterns"
-            ]
+            ],
+            "metaTitle": "Recursion - Master Recursive Thinking in Haskell",
+            "metaDescription": "Master recursive thinking in Haskell, from basic patterns to advanced techniques like tail recursion optimization."
         },
         {
             "title": "Type Classes",
@@ -84,7 +94,9 @@
             "tags": [
                 "types",
                 "advanced"
-            ]
+            ],
+            "metaTitle": "Type Classes - Haskell's Generic Code",
+            "metaDescription": "Understand Haskell's type class system, a powerful way to write generic code that works across different types."
         },
         {
             "title": "Function Composition",
@@ -96,7 +108,9 @@
             "tags": [
                 "functions",
                 "patterns"
-            ]
+            ],
+            "metaTitle": "Function Composition - Elegant Haskell Code",
+            "metaDescription": "Learn to combine functions elegantly using composition in Haskell, creating complex behaviors from simple building blocks."
         },
         {
             "title": "Error Handling",
@@ -108,7 +122,9 @@
             "tags": [
                 "error handling",
                 "patterns"
-            ]
+            ],
+            "metaTitle": "Error Handling - Robust Haskell Code",
+            "metaDescription": "Explore Haskell's robust error handling mechanisms using Maybe, Either, and custom types for safe, predictable code."
         },
         {
             "title": "Result Objects",
@@ -120,7 +136,9 @@
             "tags": [
                 "error handling",
                 "patterns"
-            ]
+            ],
+            "metaTitle": "Result Objects - Elegant Error Handling in Haskell",
+            "metaDescription": "Learn to use Result objects for elegant error handling and railway-oriented programming in Haskell."
         },
         {
             "title": "Immutable Records",
@@ -132,7 +150,9 @@
             "tags": [
                 "immutability",
                 "data structures"
-            ]
+            ],
+            "metaTitle": "Immutable Records - Safer Haskell Code",
+            "metaDescription": "Explore the benefits of using immutable records in Haskell for safer and more predictable code."
         },
         {
             "title": "Custom Types and Data Modeling",
@@ -144,7 +164,9 @@
             "tags": [
                 "types",
                 "modeling"
-            ]
+            ],
+            "metaTitle": "Custom Types and Data Modeling in Haskell",
+            "metaDescription": "Learn how to define custom types and model complex data structures in Haskell."
         },
         {
             "title": "IO and Effects",
@@ -156,7 +178,9 @@
             "tags": [
                 "IO",
                 "effects"
-            ]
+            ],
+            "metaTitle": "IO and Effects - Pure Functional Haskell",
+            "metaDescription": "Understand how Haskell handles input/output and side effects in a pure functional way."
         },
         {
             "title": "Testing in Haskell",
@@ -168,7 +192,9 @@
             "tags": [
                 "testing",
                 "tools"
-            ]
+            ],
+            "metaTitle": "Testing in Haskell - Effective Tools and Techniques",
+            "metaDescription": "Discover the tools and techniques for effective testing in Haskell."
         }
     ]
 }

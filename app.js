@@ -35,12 +35,65 @@ window.navigateTo = (route, event) => {
     window.location.hash = `#/${route}`;
 };
 
-const updateMetaTags = (title, description) => {
+const updateMetaTags = (title, description, imageUrl, url) => {
     document.title = title || 'Default Title';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
         metaDescription.setAttribute('content', description || 'Default description');
     }
+
+    // Open Graph meta tags
+    const ogTitle = document.querySelector('meta[property="og:title"]') || document.createElement('meta');
+    ogTitle.setAttribute('property', 'og:title');
+    ogTitle.setAttribute('content', title || 'Default Title');
+    document.head.appendChild(ogTitle);
+
+    const ogDescription = document.querySelector('meta[property="og:description"]') || document.createElement('meta');
+    ogDescription.setAttribute('property', 'og:description');
+    ogDescription.setAttribute('content', description || 'Default description');
+    document.head.appendChild(ogDescription);
+
+    const ogImage = document.querySelector('meta[property="og:image"]') || document.createElement('meta');
+    ogImage.setAttribute('property', 'og:image');
+    ogImage.setAttribute('content', imageUrl || 'default-image.jpg');
+    document.head.appendChild(ogImage);
+
+    const ogUrl = document.querySelector('meta[property="og:url"]') || document.createElement('meta');
+    ogUrl.setAttribute('property', 'og:url');
+    ogUrl.setAttribute('content', url || window.location.href);
+    document.head.appendChild(ogUrl);
+
+    // Twitter Card meta tags
+    const twitterCard = document.querySelector('meta[name="twitter:card"]') || document.createElement('meta');
+    twitterCard.setAttribute('name', 'twitter:card');
+    twitterCard.setAttribute('content', 'summary_large_image');
+    document.head.appendChild(twitterCard);
+
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]') || document.createElement('meta');
+    twitterTitle.setAttribute('name', 'twitter:title');
+    twitterTitle.setAttribute('content', title || 'Default Title');
+    document.head.appendChild(twitterTitle);
+
+    const twitterDescription = document.querySelector('meta[name="twitter:description"]') || document.createElement('meta');
+    twitterDescription.setAttribute('name', 'twitter:description');
+    twitterDescription.setAttribute('content', description || 'Default description');
+    document.head.appendChild(twitterDescription);
+
+    const twitterImage = document.querySelector('meta[name="twitter:image"]') || document.createElement('meta');
+    twitterImage.setAttribute('name', 'twitter:image');
+    twitterImage.setAttribute('content', imageUrl || 'default-image.jpg');
+    document.head.appendChild(twitterImage);
+
+    // Additional SEO meta tags
+    const robots = document.querySelector('meta[name="robots"]') || document.createElement('meta');
+    robots.setAttribute('name', 'robots');
+    robots.setAttribute('content', 'index, follow');
+    document.head.appendChild(robots);
+
+    const canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
+    canonical.setAttribute('rel', 'canonical');
+    canonical.setAttribute('href', url || window.location.href);
+    document.head.appendChild(canonical);
 };
 
 /**

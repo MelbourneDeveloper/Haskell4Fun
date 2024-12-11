@@ -1,4 +1,4 @@
-# Haskell 4 Fun
+# Haskell4.fun
 
 A modern, interactive website for learning Haskell programming concepts. We are aiming to make Haskell accessible to everyone and add more labs so that people can directly try Haskell without needing to install anything.
 
