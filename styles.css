@@ -30,13 +30,66 @@
     --color-code-highlight-hover: rgba(255, 255, 255, 0.2);
     --color-inline-code-bg: rgba(37, 99, 235, 0.08);
 
-    /* Non-color variables */
+    /* Spacing Scale */
+    --space-xxs: 0.25rem;  /* 4px */
+    --space-xs: 0.5rem;    /* 8px */
+    --space-sm: 0.75rem;   /* 12px */
+    --space-md: 1rem;      /* 16px */
+    --space-lg: 1.5rem;    /* 24px */
+    --space-xl: 2rem;      /* 32px */
+    --space-2xl: 2.5rem;   /* 40px */
+    --space-3xl: 3rem;     /* 48px */
+
+    /* Font Sizes */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-md: 0.95rem;    /* 15.2px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.25rem;    /* 20px */
+    --text-xl: 1.875rem;   /* 30px */
+    --text-2xl: 2rem;      /* 32px */
+    --text-3xl: 2.5rem;    /* 40px */
+
+    /* Line Heights */
+    --leading-none: 1;
+    --leading-tight: 1.2;
+    --leading-snug: 1.3;
+    --leading-normal: 1.6;
+    --leading-relaxed: 1.7;
+
+    /* Layout */
     --nav-height: 4rem;
+    --nav-height-mobile: 3.5rem;
     --content-width: 1000px;
-    --card-radius: 8px;
+    --content-padding: 2rem;
+    --content-padding-mobile: 1rem;
+    --burger-width: 3.25rem;
+    --burger-line-width: 16px;
+    --burger-line-height: 2px;
+    --burger-line-spacing: 6px;
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --card-radius: var(--radius-md);
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.6s ease;
+    --transition-gradient: 8s ease;
+    --transition-bezier: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Shadows */
     --card-shadow: 0 4px 6px -1px var(--color-shadow-dark), 0 2px 4px -1px var(--color-shadow-light);
     --card-shadow-hover: 0 10px 15px -3px var(--color-shadow-dark), 0 4px 6px -2px var(--color-shadow-light);
+    --nav-shadow: 0 1px 3px var(--color-shadow-medium);
+
+    /* Typography */
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-normal: -0.01em;
     --heading-font: 'Inter', system-ui, -apple-system, sans-serif;
+    --code-font: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 /* ==========================================================================
@@ -44,18 +97,18 @@
    ========================================================================== */
 body {
     font-family: var(--heading-font);
-    line-height: 1.7;
+    line-height: var(--leading-relaxed);
     color: var(--color-text);
     background: var(--color-bg);
     min-height: 100vh;
-    letter-spacing: -0.01em;
+    letter-spacing: var(--letter-spacing-normal);
 }
 
 /* Links */
 a {
     color: var(--color-primary);
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
     font-weight: 500;
 }
 
@@ -66,38 +119,38 @@ a:hover {
 
 /* Typography */
 h1 {
-    font-size: 2.5rem;
+    font-size: var(--text-3xl);
     font-weight: 700;
     color: var(--color-text);
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    margin-bottom: var(--space-lg);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--letter-spacing-tight);
     background: linear-gradient(120deg, var(--color-primary), var(--color-secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     opacity: 0;
-    animation: slideUp 0.6s ease forwards;
+    animation: slideUp var(--transition-slow) forwards;
     animation-delay: 0.1s;
 }
 
 h2 {
-    font-size: 1.875rem;
+    font-size: var(--text-xl);
     font-weight: 600;
     color: var(--color-text);
-    margin: 2.5rem 0 1.5rem;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
+    margin: var(--space-2xl) 0 var(--space-lg);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--letter-spacing-normal);
     opacity: 0;
-    animation: slideUp 0.6s ease forwards;
+    animation: slideUp var(--transition-slow) forwards;
     animation-delay: 0.2s;
 }
 
 p {
-    margin: 1.5rem 0;
+    margin: var(--space-lg) 0;
     color: var(--color-text);
     opacity: 0;
-    animation: slideUp 0.6s ease forwards;
+    animation: slideUp var(--transition-slow) forwards;
     animation-delay: 0.3s;
     width: 100%;
 }
@@ -109,13 +162,13 @@ p {
     background: var(--color-nav-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 1px 3px var(--color-shadow-medium);
+    box-shadow: var(--nav-shadow);
     height: var(--nav-height);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 100;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all var(--transition-normal) var(--transition-bezier);
 }
 
 .navbar.nav-hidden {
@@ -124,15 +177,15 @@ p {
 
 .navbar-brand .navbar-item {
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: var(--text-lg);
     color: var(--color-primary);
-    padding: 0 1.5rem;
+    padding: 0 var(--space-lg);
     background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-primary));
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradient 8s ease infinite;
+    animation: gradient var(--transition-gradient) infinite;
 }
 
 /* Mobile Navigation */
@@ -146,7 +199,7 @@ p {
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 4px 6px -1px var(--color-shadow-nav);
-        padding: 0.5rem 0;
+        padding: var(--space-xs) 0;
         display: none;
     }
 
@@ -159,29 +212,29 @@ p {
     }
 
     .navbar-burger {
-        margin-right: 0.75rem;
+        margin-right: var(--space-sm);
     }
 
     .navbar-item {
-        padding: 0.75rem 1.5rem;
+        padding: var(--space-sm) var(--space-lg);
     }
 }
 
 /* Hamburger Menu */
 .navbar-burger {
     height: var(--nav-height);
-    width: 3.25rem;
+    width: var(--burger-width);
 }
 
 .navbar-burger span {
-    height: 2px;
-    width: 16px;
-    left: calc(50% - 8px);
+    height: var(--burger-line-height);
+    width: var(--burger-line-width);
+    left: calc(50% - var(--burger-line-width) / 2);
     background-color: var(--color-primary);
 }
 
 .navbar-burger span:nth-child(1) {
-    top: calc(50% - 6px);
+    top: calc(50% - var(--burger-line-spacing));
 }
 
 .navbar-burger span:nth-child(2) {
@@ -189,7 +242,7 @@ p {
 }
 
 .navbar-burger span:nth-child(3) {
-    top: calc(50% + 6px);
+    top: calc(50% + var(--burger-line-spacing));
 }
 
 .navbar-burger.is-active span:nth-child(1) {
@@ -210,7 +263,7 @@ p {
 .section {
     max-width: var(--content-width);
     margin: var(--nav-height) auto 0;
-    padding: 3rem 2rem;
+    padding: var(--space-3xl) var(--content-padding);
     width: 100%;
     position: relative;
     z-index: 1;
@@ -233,7 +286,7 @@ p {
     width: 100%;
     max-width: var(--content-width);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 var(--content-padding);
 }
 
 /* ==========================================================================
@@ -244,9 +297,9 @@ p {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     background: var(--color-nav-bg);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     opacity: 0;
-    animation: slideUp 0.6s ease forwards;
+    animation: slideUp var(--transition-slow) forwards;
     animation-delay: 0.3s;
 }
 
@@ -262,10 +315,10 @@ p {
 }
 
 .toc li {
-    margin: 0.75rem 0;
-    padding-left: 1.25rem;
+    margin: var(--space-sm) 0;
+    padding-left: var(--space-lg);
     position: relative;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
 }
 
 .toc li::before {
@@ -289,12 +342,12 @@ p {
 .article {
     background: var(--color-nav-bg);
     border-radius: var(--card-radius);
-    padding: 2rem;
+    padding: var(--space-xl);
     box-shadow: var(--card-shadow);
     border: 1px solid var(--color-shadow-medium);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     opacity: 0;
-    animation: slideUp 0.6s ease forwards;
+    animation: slideUp var(--transition-slow) forwards;
     animation-delay: 0.4s;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -316,15 +369,15 @@ pre.prettyprint {
     background: var(--color-code-bg) !important;
     border: none !important;
     border-radius: var(--card-radius);
-    padding: 1.5rem !important;
-    margin: 2rem 0;
+    padding: var(--space-lg) !important;
+    margin: var(--space-xl) 0;
     box-shadow: none;
     color: #f8f8f2 !important;
-    font-size: 0.95rem;
+    font-size: var(--text-md);
     position: relative;
     overflow: hidden;
-    transition: all 0.2s ease;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    transition: all var(--transition-fast);
+    font-family: var(--code-font);
 }
 
 pre.prettyprint::before {
@@ -346,9 +399,9 @@ pre.prettyprint:hover::before {
 pre.prettyprint::after {
     content: 'HASKELL';
     position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-    font-size: 0.75rem;
+    top: var(--space-xs);
+    right: var(--space-md);
+    font-size: var(--text-xs);
     color: var(--color-text-light);
     opacity: 0.6;
     font-family: var(--heading-font);
@@ -359,17 +412,17 @@ pre.prettyprint::after {
 /* Code Copy Button */
 .copy-button {
     position: absolute;
-    top: 0.5rem;
-    right: 3rem;
+    top: var(--space-xs);
+    right: var(--space-3xl);
     background: var(--color-code-highlight);
     border: none;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+    padding: var(--space-xxs) var(--space-xs);
+    border-radius: var(--radius-sm);
     color: var(--color-text-light);
-    font-size: 0.75rem;
+    font-size: var(--text-xs);
     cursor: pointer;
     opacity: 0;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
 }
 
 pre.prettyprint:hover .copy-button {
@@ -386,10 +439,10 @@ pre.prettyprint:hover .copy-button {
     background: var(--color-inline-code-bg) !important;
     color: var(--color-primary) !important;
     padding: 0.2em 0.4em;
-    border-radius: 4px;
-    font-size: 0.9em;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
     font-weight: 500;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: var(--code-font);
 }
 
 .copy-button.copied::before {
@@ -461,28 +514,28 @@ pre.prettyprint:hover .copy-button {
    ========================================================================== */
 @media (max-width: 768px) {
     :root {
-        --nav-height: 3.5rem;
+        --nav-height: var(--nav-height-mobile);
     }
 
     .section {
-        padding: 2rem 1rem;
+        padding: var(--space-xl) var(--content-padding-mobile);
     }
 
     h1 {
-        font-size: 2rem;
+        font-size: var(--text-2xl);
     }
 
     h2 {
-        font-size: 1.5rem;
+        font-size: var(--text-lg);
     }
 
     .article {
-        padding: 1.5rem;
+        padding: var(--space-lg);
     }
 
     pre.prettyprint {
-        padding: 1.25rem !important;
-        font-size: 0.875rem;
+        padding: var(--space-lg) !important;
+        font-size: var(--text-sm);
     }
 
     .section::before {
@@ -504,15 +557,15 @@ pre.prettyprint:hover .copy-button {
 /* Unordered Lists */
 ul:not(.toc ul) {
     width: 100%;
-    margin: 1.5rem 0;
-    padding-left: 1.5rem;
+    margin: var(--space-lg) 0;
+    padding-left: var(--space-lg);
     opacity: 0;
-    animation: slideUp 0.6s ease forwards;
+    animation: slideUp var(--transition-slow) forwards;
     animation-delay: 0.4s;
 }
 
 ul:not(.toc ul) li {
-    margin: 0.75rem 0;
+    margin: var(--space-sm) 0;
     position: relative;
 }
 
@@ -523,18 +576,18 @@ ul:not(.toc ul) li::marker {
 /* Ordered Lists */
 ol {
     width: 100%;
-    margin: 1.5rem 0;
-    padding-left: 2.5rem;
+    margin: var(--space-lg) 0;
+    padding-left: var(--space-2xl);
     list-style-type: decimal;
     opacity: 0;
-    animation: slideUp 0.6s ease forwards;
+    animation: slideUp var(--transition-slow) forwards;
     animation-delay: 0.4s;
 }
 
 ol li {
-    margin: 0.75rem 0;
-    padding-left: 0.5rem;
-    line-height: 1.6;
+    margin: var(--space-sm) 0;
+    padding-left: var(--space-xs);
+    line-height: var(--leading-normal);
     color: var(--color-text);
 }
 
