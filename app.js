@@ -130,21 +130,41 @@ const renderRead = async () => {
     try {
         const toc = await loadTOC();
         const content = `
-            <div class="toc">
-                <h2 class="title is-4">Articles</h2>
-                <ul>
-                    ${toc.map(({ title, file }) => {
-            // Preserve the full path structure
-            const articlePath = file.replace('articles/', '').replace('.md', '');
-            return `
-                            <li>
-                                <a href="#/read/${articlePath}" onclick="window.navigateTo('read/${articlePath}', event)">
-                                    ${title}
-                                </a>
-                            </li>
-                        `;
-        }).join('')}
-                </ul>
+            <h1>Articles</h1>
+            <div class="articles-container">
+                ${toc.map(({ title, file, summary, image, readingTime, tags }) => {
+                    if (!file) return ''; // Skip incomplete entries
+                    const articlePath = file.replace('articles/', '').replace('.md', '');
+                    return `
+                        <div class="article-card">
+                            <a href="#/read/${articlePath}" onclick="window.navigateTo('read/${articlePath}', event)">
+                                ${image ? `<img src="${image}" alt="${title}" class="article-image">` : ''}
+                            </a>
+                            <div class="article-content">
+                                <h3 class="article-title">
+                                    <a href="#/read/${articlePath}" onclick="window.navigateTo('read/${articlePath}', event)" class="hover-link">${title}</a>
+                                </h3>
+                                ${summary ? `<p class="article-summary">${summary}</p>` : ''}
+                                <div class="article-metadata">
+                                    ${readingTime ? `
+                                        <span class="reading-time">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M8 3.5V8L10.5 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                                <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/>
+                                            </svg>
+                                            ${readingTime}
+                                        </span>
+                                    ` : ''}
+                                </div>
+                                ${tags ? `
+                                    <div class="tags-container">
+                                        ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
             </div>
         `;
         return content;

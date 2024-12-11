@@ -122,19 +122,51 @@
         },
         {
             "title": "Immutable Records",
-            "file": "articles/11-immutable-records.md"
+            "file": "articles/11-immutable-records.md",
+            "slug": "immutable-records",
+            "summary": "Explore the benefits of using immutable records in Haskell for safer and more predictable code.",
+            "image": "/images/immutable-records.jpg",
+            "readingTime": "10 min read",
+            "tags": [
+                "immutability",
+                "data structures"
+            ]
         },
         {
             "title": "Custom Types and Data Modeling",
-            "file": "articles/12-custom-types.md"
+            "file": "articles/12-custom-types.md",
+            "slug": "custom-types",
+            "summary": "Learn how to define custom types and model complex data structures in Haskell.",
+            "image": "/images/custom-types.jpg",
+            "readingTime": "12 min read",
+            "tags": [
+                "types",
+                "modeling"
+            ]
         },
         {
             "title": "IO and Effects",
-            "file": "articles/13-io-and-effects.md"
+            "file": "articles/13-io-and-effects.md",
+            "slug": "io-and-effects",
+            "summary": "Understand how Haskell handles input/output and side effects in a pure functional way.",
+            "image": "/images/io-and-effects.jpg",
+            "readingTime": "11 min read",
+            "tags": [
+                "IO",
+                "effects"
+            ]
         },
         {
             "title": "Testing in Haskell",
-            "file": "articles/14-testing.md"
+            "file": "articles/14-testing.md",
+            "slug": "testing",
+            "summary": "Discover the tools and techniques for effective testing in Haskell.",
+            "image": "/images/testing.jpg",
+            "readingTime": "9 min read",
+            "tags": [
+                "testing",
+                "tools"
+            ]
         }
     ]
 }
