@@ -2,43 +2,123 @@
     "articles": [
         {
             "title": "Introduction to Haskell",
-            "file": "articles/01-introduction-to-haskell.md"
+            "file": "articles/01-introduction-to-haskell.md",
+            "slug": "introduction-to-haskell",
+            "summary": "Start your journey into functional programming with Haskell. Learn about its pure functions, lazy evaluation, and type system that make it unique and powerful.",
+            "image": "/images/intro-haskell.jpg",
+            "readingTime": "10 min read",
+            "tags": [
+                "beginner",
+                "fundamentals"
+            ]
         },
         {
             "title": "Basic Functions and Types",
-            "file": "articles/02-basic-functions-and-types.md"
+            "file": "articles/02-basic-functions-and-types.md",
+            "slug": "basic-functions-and-types",
+            "summary": "Explore Haskell's type system, function declarations, and how its strong static typing helps prevent bugs before they happen.",
+            "image": "/images/types.jpg",
+            "readingTime": "12 min read",
+            "tags": [
+                "types",
+                "functions"
+            ]
         },
         {
             "title": "Lists and List Operations",
-            "file": "articles/03-lists-and-list-operations.md"
+            "file": "articles/03-lists-and-list-operations.md",
+            "slug": "lists-and-list-operations",
+            "summary": "Master Haskell's powerful list manipulation capabilities, from basic operations to advanced list comprehensions and infinite lists.",
+            "image": "/images/lists.jpg",
+            "readingTime": "15 min read",
+            "tags": [
+                "lists",
+                "data structures"
+            ]
         },
         {
             "title": "Pattern Matching",
-            "file": "articles/04-pattern-matching.md"
+            "file": "articles/04-pattern-matching.md",
+            "slug": "pattern-matching",
+            "summary": "Learn how pattern matching makes your code more expressive and concise while handling complex data structures elegantly.",
+            "image": "/images/pattern-matching.jpg",
+            "readingTime": "8 min read",
+            "tags": [
+                "patterns",
+                "syntax"
+            ]
         },
         {
             "title": "Higher-Order Functions",
-            "file": "articles/05-higher-order-functions.md"
+            "file": "articles/05-higher-order-functions.md",
+            "slug": "higher-order-functions",
+            "summary": "Discover the power of functions that operate on other functions, enabling elegant abstractions and reusable code patterns.",
+            "image": "/images/higher-order.jpg",
+            "readingTime": "14 min read",
+            "tags": [
+                "advanced",
+                "functions"
+            ]
         },
         {
             "title": "Recursion",
-            "file": "articles/06-recursion.md"
+            "file": "articles/06-recursion.md",
+            "slug": "recursion",
+            "summary": "Master recursive thinking in Haskell, from basic recursive patterns to advanced techniques like tail recursion optimization.",
+            "image": "/images/recursion.jpg",
+            "readingTime": "11 min read",
+            "tags": [
+                "fundamentals",
+                "patterns"
+            ]
         },
         {
             "title": "Type Classes",
-            "file": "articles/07-type-classes.md"
+            "file": "articles/07-type-classes.md",
+            "slug": "type-classes",
+            "summary": "Understand Haskell's type class system, a powerful way to write generic code that works across different types.",
+            "image": "/images/type-classes.jpg",
+            "readingTime": "13 min read",
+            "tags": [
+                "types",
+                "advanced"
+            ]
         },
         {
             "title": "Function Composition",
-            "file": "articles/08-function-composition.md"
+            "file": "articles/08-function-composition.md",
+            "slug": "function-composition",
+            "summary": "Learn to combine functions elegantly using composition, creating complex behaviors from simple building blocks.",
+            "image": "/images/composition.jpg",
+            "readingTime": "9 min read",
+            "tags": [
+                "functions",
+                "patterns"
+            ]
         },
         {
             "title": "Error Handling",
-            "file": "articles/09-error-handling.md"
+            "file": "articles/09-error-handling.md",
+            "slug": "error-handling",
+            "summary": "Explore Haskell's robust error handling mechanisms using Maybe, Either, and custom types for safe, predictable code.",
+            "image": "/images/error-handling.jpg",
+            "readingTime": "10 min read",
+            "tags": [
+                "error handling",
+                "patterns"
+            ]
         },
         {
             "title": "Result Objects",
-            "file": "articles/10-result-objects.md"
+            "file": "articles/10-result-objects.md",
+            "slug": "result-objects",
+            "summary": "Learn to use Result objects for elegant error handling and railway-oriented programming in Haskell.",
+            "image": "/images/result-objects.jpg",
+            "readingTime": "12 min read",
+            "tags": [
+                "error handling",
+                "patterns"
+            ]
         },
         {
             "title": "Immutable Records",
