@@ -158,13 +158,29 @@ p {
     background-color: var(--primary-color);
 }
 
-.navbar-burger span:nth-child(1) { top: calc(50% - 6px); }
-.navbar-burger span:nth-child(2) { top: calc(50%); }
-.navbar-burger span:nth-child(3) { top: calc(50% + 6px); }
+.navbar-burger span:nth-child(1) {
+    top: calc(50% - 6px);
+}
 
-.navbar-burger.is-active span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
-.navbar-burger.is-active span:nth-child(2) { opacity: 0; }
-.navbar-burger.is-active span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+.navbar-burger span:nth-child(2) {
+    top: calc(50%);
+}
+
+.navbar-burger span:nth-child(3) {
+    top: calc(50% + 6px);
+}
+
+.navbar-burger.is-active span:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+}
+
+.navbar-burger.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-burger.is-active span:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+}
 
 /* ==========================================================================
    Layout & Content
@@ -186,7 +202,7 @@ p {
     width: 100%;
     height: 100%;
     background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.03), transparent 70%),
-                radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.03), transparent 70%);
+        radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.03), transparent 70%);
     z-index: -1;
     pointer-events: none;
 }
@@ -268,21 +284,25 @@ p {
 }
 
 /* Code Blocks */
+.article pre {
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 pre.prettyprint {
     background: var(--code-bg) !important;
     border: none !important;
     border-radius: var(--card-radius);
     padding: 1.5rem !important;
     margin: 2rem 0;
-    box-shadow: var(--card-shadow);
+    box-shadow: none;
     color: #f8f8f2 !important;
     font-size: 0.95rem;
     position: relative;
     overflow: hidden;
     transition: all 0.2s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    counter-reset: line;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 pre.prettyprint::before {
@@ -297,8 +317,12 @@ pre.prettyprint::before {
     transition: opacity 0.2s ease;
 }
 
+pre.prettyprint:hover::before {
+    opacity: 1;
+}
+
 pre.prettyprint::after {
-    content: 'Haskell';
+    content: 'HASKELL';
     position: absolute;
     top: 0.5rem;
     right: 1rem;
@@ -335,6 +359,17 @@ pre.prettyprint:hover .copy-button {
     color: white;
 }
 
+/* Inline code */
+:not(pre) > code {
+    background: rgba(37, 99, 235, 0.08) !important;
+    color: var(--primary-color) !important;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 500;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
 .copy-button.copied::before {
     content: '✓';
     margin-right: 0.25rem;
@@ -350,6 +385,7 @@ pre.prettyprint:hover .copy-button {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -357,21 +393,45 @@ pre.prettyprint:hover .copy-button {
 }
 
 @keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 @keyframes checkmark {
-    0% { transform: scale(0); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* ==========================================================================
@@ -385,11 +445,11 @@ pre.prettyprint:hover .copy-button {
     .section {
         padding: 2rem 1rem;
     }
-    
+
     h1 {
         font-size: 2rem;
     }
-    
+
     h2 {
         font-size: 1.5rem;
     }
@@ -462,8 +522,11 @@ ol li::marker {
 }
 
 /* Nested Lists */
-ol ol, ul ul, ol ul, ul ol {
+ol ol,
+ul ul,
+ol ul,
+ul ol {
     margin: 0.75rem 0;
     opacity: 1;
     animation: none;
-} 
+}
