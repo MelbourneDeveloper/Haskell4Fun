@@ -19,7 +19,7 @@ const staticRoutes = [
 const staticXml = staticRoutes
     .map(route => `
     <url>
-        <loc>${baseUrl}${route}</loc>
+        <loc>${baseUrl}${route === '/' ? '' : `/#${route}`}</loc>
         <changefreq>weekly</changefreq>
         <priority>${route === '/' ? '1.0' : '0.8'}</priority>
     </url>`)
@@ -29,7 +29,7 @@ const staticXml = staticRoutes
 const articlesXml = toc.articles
     .map(article => `
     <url>
-        <loc>${baseUrl}/read/${article.file.replace('articles/', '').replace('.md', '')}</loc>
+        <loc>${baseUrl}/#/read/${article.file.replace('articles/', '').replace('.md', '')}</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>`)
@@ -40,7 +40,7 @@ const labsXml = fs.readdirSync('articles/labs')
     .filter(file => file.endsWith('.md'))
     .map(file => `
     <url>
-        <loc>${baseUrl}/labs/${file.replace('.md', '')}</loc>
+        <loc>${baseUrl}/#/labs/${file.replace('.md', '')}</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>`)
@@ -54,9 +54,6 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     ${labsXml}
 </urlset>`;
 
-// Get the absolute path to the root directory
-const rootDir = path.resolve(__dirname, '..');
-
 // Write sitemap to file with proper XML formatting
-fs.writeFileSync(path.join(rootDir, 'sitemap.xml'), sitemap.replace(/^\s+/gm, '    '));
+fs.writeFileSync('./sitemap.xml', sitemap.replace(/^\s+/gm, '    '));
 console.log('Sitemap generated successfully!'); 

@@ -31,7 +31,7 @@ jobs:
           node-version: '20'
 
       - name: Generate Sitemap
-        run: node scripts/generate-sitemap.js
+        run: node ./generate-sitemap.js
 
       - name: Print Sitemap Contents
         run: cat sitemap.xml
