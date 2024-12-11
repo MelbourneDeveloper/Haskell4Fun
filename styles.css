@@ -1,0 +1,417 @@
+/* ==========================================================================
+   Root Variables
+   ========================================================================== */
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary-color: #10b981;
+    --text-color: #1f2937;
+    --text-light: #6b7280;
+    --bg-color: #f8fafc;
+    --code-bg: #1a1b26;
+    --nav-height: 4rem;
+    --content-width: 1000px;
+    --card-radius: 8px;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    --heading-font: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+body {
+    font-family: var(--heading-font);
+    line-height: 1.7;
+    color: var(--text-color);
+    background: var(--bg-color);
+    min-height: 100vh;
+    letter-spacing: -0.01em;
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Typography */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: 0.1s;
+}
+
+h2 {
+    font-size: 1.875rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 2.5rem 0 1.5rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: 0.2s;
+}
+
+p {
+    margin: 1.5rem 0;
+    color: var(--text-color);
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: 0.3s;
+    width: 100%;
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+.navbar {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    height: var(--nav-height);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar.nav-hidden {
+    transform: translateY(-100%);
+}
+
+.navbar-brand .navbar-item {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    padding: 0 1.5rem;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 8s ease infinite;
+}
+
+/* Mobile Navigation */
+@media screen and (max-width: 1023px) {
+    .navbar-menu {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: var(--nav-height);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 0;
+        display: none;
+    }
+
+    .navbar-menu.is-active {
+        display: block;
+    }
+
+    .navbar.nav-hidden .navbar-menu.is-active {
+        transform: none;
+    }
+
+    .navbar-burger {
+        margin-right: 0.75rem;
+    }
+
+    .navbar-item {
+        padding: 0.75rem 1.5rem;
+    }
+}
+
+/* Hamburger Menu */
+.navbar-burger {
+    height: var(--nav-height);
+    width: 3.25rem;
+}
+
+.navbar-burger span {
+    height: 2px;
+    width: 16px;
+    left: calc(50% - 8px);
+    background-color: var(--primary-color);
+}
+
+.navbar-burger span:nth-child(1) { top: calc(50% - 6px); }
+.navbar-burger span:nth-child(2) { top: calc(50%); }
+.navbar-burger span:nth-child(3) { top: calc(50% + 6px); }
+
+.navbar-burger.is-active span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+.navbar-burger.is-active span:nth-child(2) { opacity: 0; }
+.navbar-burger.is-active span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+
+/* ==========================================================================
+   Layout & Content
+   ========================================================================== */
+.section {
+    max-width: var(--content-width);
+    margin: var(--nav-height) auto 0;
+    padding: 3rem 2rem;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.section::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.03), transparent 70%),
+                radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.03), transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.content-container {
+    width: 100%;
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ==========================================================================
+   Cards & Components
+   ========================================================================== */
+/* Table of Contents */
+.toc {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.8);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: 0.3s;
+}
+
+.toc:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc li {
+    margin: 0.75rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.toc li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+    font-weight: 500;
+    transition: transform 0.2s ease;
+}
+
+.toc li:hover {
+    transform: translateX(4px);
+}
+
+.toc li:hover::before {
+    animation: pulse 1s ease infinite;
+}
+
+/* Articles */
+.article {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--card-radius);
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+    animation-delay: 0.4s;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.article:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+/* Code Blocks */
+pre.prettyprint {
+    background: var(--code-bg) !important;
+    border: none !important;
+    border-radius: var(--card-radius);
+    padding: 1.5rem !important;
+    margin: 2rem 0;
+    box-shadow: var(--card-shadow);
+    color: #f8f8f2 !important;
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    counter-reset: line;
+}
+
+pre.prettyprint::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+pre.prettyprint::after {
+    content: 'Haskell';
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    opacity: 0.6;
+    font-family: var(--heading-font);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Code Copy Button */
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    color: var(--text-light);
+    font-size: 0.75rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+pre.prettyprint:hover .copy-button {
+    opacity: 1;
+}
+
+.copy-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.copy-button.copied::before {
+    content: '✓';
+    margin-right: 0.25rem;
+    display: inline-block;
+    animation: checkmark 0.3s ease;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes checkmark {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+@media (max-width: 768px) {
+    :root {
+        --nav-height: 3.5rem;
+    }
+
+    .section {
+        padding: 2rem 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .article {
+        padding: 1.5rem;
+    }
+
+    pre.prettyprint {
+        padding: 1.25rem !important;
+        font-size: 0.875rem;
+    }
+
+    .section::before {
+        opacity: 0.5;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+} 
