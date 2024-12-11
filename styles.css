@@ -3,8 +3,8 @@
    ========================================================================== */
 :root {
     /* Brand Colors */
-    --color-primary: #2563eb;
-    --color-primary-dark: #1d4ed8;
+    --color-primary: #4f46e5;
+    --color-primary-dark: #4338ca;
     --color-secondary: #10b981;
     
     /* Text Colors */
@@ -294,18 +294,15 @@ p {
    ========================================================================== */
 /* Table of Contents */
 .toc {
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: var(--color-nav-bg);
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    background: transparent;
     opacity: 0;
     animation: slideUp var(--transition-slow) forwards;
     animation-delay: 0.3s;
 }
 
 .toc:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--card-shadow-hover);
+    transform: none;
+    box-shadow: none;
 }
 
 .toc ul {
@@ -316,46 +313,49 @@ p {
 
 .toc li {
     margin: var(--space-sm) 0;
-    padding-left: var(--space-lg);
+    padding-left: 0;
     position: relative;
     transition: all var(--transition-fast);
 }
 
 .toc li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--color-secondary);
-    font-weight: 500;
-    transition: transform 0.2s ease;
+    display: none;
 }
 
 .toc li:hover {
-    transform: translateX(4px);
+    transform: none;
 }
 
-.toc li:hover::before {
-    animation: pulse 1s ease infinite;
+.toc a {
+    display: block;
+    padding: var(--space-xs) 0;
+    color: var(--color-primary);
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.toc a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: none;
+    opacity: 0.9;
 }
 
 /* Articles */
 .article {
-    background: var(--color-nav-bg);
-    border-radius: var(--card-radius);
-    padding: var(--space-xl);
-    box-shadow: var(--card-shadow);
-    border: 1px solid var(--color-shadow-medium);
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    background: transparent;
+    border-radius: 0;
+    padding: var(--space-xl) 0;
+    box-shadow: none;
+    border: none;
+    transition: none;
     opacity: 0;
     animation: slideUp var(--transition-slow) forwards;
     animation-delay: 0.4s;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
 }
 
 .article:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--card-shadow-hover);
+    transform: none;
+    box-shadow: none;
 }
 
 /* Code Blocks */
