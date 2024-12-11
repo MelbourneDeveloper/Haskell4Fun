@@ -651,6 +651,75 @@
                 font-size: 1.5rem;
             }
         }
+
+        /* Add new mobile menu styles */
+        @media screen and (max-width: 1023px) {
+            .navbar-menu {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: var(--nav-height);
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                padding: 0.5rem 0;
+                display: none;
+            }
+
+            .navbar-menu.is-active {
+                display: block;
+            }
+
+            .navbar.nav-hidden .navbar-menu.is-active {
+                transform: none;
+            }
+
+            .navbar-burger {
+                margin-right: 0.75rem;
+            }
+
+            .navbar-item {
+                padding: 0.75rem 1.5rem;
+            }
+        }
+
+        /* Update navbar-burger styles */
+        .navbar-burger {
+            height: var(--nav-height);
+            width: 3.25rem;
+        }
+
+        .navbar-burger span {
+            height: 2px;
+            width: 16px;
+            left: calc(50% - 8px);
+            background-color: var(--primary-color);
+        }
+
+        .navbar-burger span:nth-child(1) {
+            top: calc(50% - 6px);
+        }
+
+        .navbar-burger span:nth-child(2) {
+            top: calc(50%);
+        }
+
+        .navbar-burger span:nth-child(3) {
+            top: calc(50% + 6px);
+        }
+
+        .navbar-burger.is-active span:nth-child(1) {
+            transform: translateY(5px) rotate(45deg);
+        }
+
+        .navbar-burger.is-active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .navbar-burger.is-active span:nth-child(3) {
+            transform: translateY(-5px) rotate(-45deg);
+        }
     </style>
 </head>
 
@@ -688,14 +757,33 @@
     <script>
         let lastScrollY = window.scrollY;
         const navbar = document.querySelector('.navbar');
+        const burger = document.querySelector('.navbar-burger');
+        const menu = document.querySelector('.navbar-menu');
 
         window.addEventListener('scroll', () => {
-            if (window.scrollY > lastScrollY) {
+            if (window.scrollY > lastScrollY && !menu.classList.contains('is-active')) {
                 navbar.classList.add('nav-hidden');
             } else {
                 navbar.classList.remove('nav-hidden');
             }
             lastScrollY = window.scrollY;
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.navbar-item').forEach(item => {
+            item.addEventListener('click', () => {
+                burger.classList.remove('is-active');
+                menu.classList.remove('is-active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            const isClickInside = navbar.contains(event.target);
+            if (!isClickInside && menu.classList.contains('is-active')) {
+                burger.classList.remove('is-active');
+                menu.classList.remove('is-active');
+            }
         });
 
         // Add copy functionality to code blocks
