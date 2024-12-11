@@ -30,15 +30,15 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
       - name: Generate Sitemap
         run: node ./generate-sitemap.js
 
       - name: Print Sitemap Contents
         run: cat sitemap.xml
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
